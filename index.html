@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>BTS · 7 corazones 💜</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+
+    background:
+        radial-gradient(circle at center,
+        #7139a8 0%,
+        #301052 45%,
+        #0b0312 100%);
+
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 760px;
+    padding: 20px;
+}
+
+/* TÍTULO */
+
+h1 {
+    text-align: center;
+    font-size: clamp(28px, 7vw, 45px);
+    margin: 0;
+}
+
+.subtitle {
+    text-align: center;
+    margin: 10px auto;
+    color: #eadcff;
+}
+
+
+/* ESCENA */
+
+.scene {
+    position: relative;
+
+    width: 100%;
+    height: 650px;
+
+    margin-top: 20px;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #bd78ff35,
+            transparent 55%
+        );
+
+    border: 1px solid #ffffff30;
+
+    box-shadow:
+        0 25px 70px #0008;
+}
+
+
+/* CARA DEL INTEGRANTE */
+
+.face-wrap {
+
+    position: absolute;
+
+    left: 50%;
+    top: 38%;
+
+    transform: translate(-50%, -50%);
+
+    width: 88%;
+    height: 390px;
+
+    background: white;
+
+    border-radius: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 50px #0008;
+
+    border: 5px solid #ffffff60;
+}
+
+.face {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    animation:
+        aparecer .7s ease;
+}
+
+@keyframes aparecer {
+
+    0% {
+        opacity: 0;
+        transform: scale(.7);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* CORAZÓN */
+
+.heart {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 20px;
+
+    transform: translateX(-50%);
+
+    width: 90%;
+    min-height: 210px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    z-index: 5;
+
+    filter:
+        drop-shadow(0 15px 25px #0008);
+}
+
+.heart::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #c18aff,
+            #762bb8,
+            #481276
+        );
+
+    clip-path:
+        polygon(
+            50% 95%,
+            5% 42%,
+            5% 25%,
+            12% 12%,
+            25% 8%,
+            38% 15%,
+            50% 28%,
+            62% 15%,
+            75% 8%,
+            88% 12%,
+            95% 25%,
+            95% 42%
+        );
+
+    transform: scale(1.05);
+}
+
+.heart-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 75%;
+}
+
+.quote {
+
+    font-size:
+        clamp(15px, 3vw, 21px);
+
+    font-weight: bold;
+
+    line-height: 1.4;
+
+    text-shadow:
+        0 2px 8px #26003f;
+}
+
+.name {
+
+    margin-top: 10px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* CONTROLES */
+
+.controls {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-top: 20px;
+}
+
+button {
+
+    border: none;
+
+    border-radius: 30px;
+
+    padding: 12px 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    color: #321052;
+
+    background: white;
+}
+
+button.secondary {
+
+    color: white;
+
+    background: #ffffff20;
+
+    border: 1px solid #ffffff40;
+}
+
+
+/* NOMBRES */
+
+.member-list {
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 15px;
+}
+
+.pill {
+
+    padding: 8px 12px;
+
+    font-size: 11px;
+
+    color: #dbc8f5;
+
+    background: #ffffff10;
+
+    border: 1px solid #ffffff25;
+}
+
+.pill.active {
+
+    color: white;
+
+    background: #a970ff;
+
+}
+
+
+/* FINAL */
+
+.final-screen {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: none;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    background: #13051f;
+}
+
+.final-screen.show {
+
+    display: flex;
+
+}
+
+.final-image {
+
+    width: 92%;
+
+    max-height: 70%;
+
+    object-fit: contain;
+
+    border-radius: 25px;
+
+}
+
+.final-heart {
+
+    position: absolute;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    width: 80%;
+
+    height: 200px;
+
+    color: white;
+
+    font-size: clamp(30px, 8vw, 60px);
+
+    font-weight: 900;
+
+    text-shadow:
+        0 3px 15px #000;
+
+}
+
+@media(max-width:600px) {
+
+    .scene {
+        height: 700px;
+    }
+
+    .face-wrap {
+
+        width: 92%;
+        height: 370px;
+
+        top: 34%;
+    }
+
+    .heart {
+
+        width: 95%;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<main class="app">
+
+<h1>
+💜 BTS · 7 corazones 💜
+</h1>
+
+<p class="subtitle">
+Cada integrante tiene 5 segundos para compartir
+un mensaje especial.
+</p>
+
+
+<section class="scene">
+
+    <!-- CARA -->
+
+    <div class="face-wrap">
+
+        <img
+            id="face"
+            class="face"
+            alt="Integrante de BTS"
+        >
+
+    </div>
+
+
+    <!-- CORAZÓN -->
+
+    <div
+        id="heart"
+        class="heart"
+    >
+
+        <div class="heart-content">
+
+            <div
+                id="quote"
+                class="quote">
+            </div>
+
+            <div
+                id="name"
+                class="name">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FINAL -->
+
+    <div
+        id="finalScreen"
+        class="final-screen"
+    >
+
+        <img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23512f7f' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23c18aff' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EBTS%3C/text%3E%3C/svg%3E"
+            class="final-image"
+            alt="BTS"
+        >
+
+        <div class="final-heart">
+
+            TE AMAMOS 💜
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="controls">
+
+    <button id="play">
+        ▶ Iniciar
+    </button>
+
+    <button
+        id="pause"
+        class="secondary">
+        ⏸ Pausar
+    </button>
+
+    <button
+        id="restart"
+        class="secondary">
+        ↻ Reiniciar
+    </button>
+
+</div>
+
+
+<div
+    id="memberList"
+    class="member-list">
+</div>
+
+
+</main>
+
+
+<script>
+
+/* ==========================================
+   INFORMACIÓN DE LOS 7 INTEGRANTES
+========================================== */
+
+const members = [
+
+{
+    name: "Jin",
+
+    quote:
+    "Tu sonrisa tiene el poder de hacer que un momento sencillo se vuelva inolvidable.",
+
+    img:
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23d4a5ff' width='300' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='32' fill='%23512f7f' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EJin%3C/text%3E%3C/svg%3E"
+},
+
+{
+    name: "Suga",
+
+    quote:
+    "Incluso en los días silenciosos, recuerda que hay luz esperando encontrarte.",
+
+    img:
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23d4a5ff' width='300' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='32' fill='%23512f7f' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3ESuga%3C/text%3E%3C/svg%3E"
+},
+
+{
+    name: "J-Hope",
+
+    quote:
+    "Que nunca te falten motivos para sonreír y personas que hagan brillar tu camino.",
+
+    img:
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23d4a5ff' width='300' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='32' fill='%23512f7f' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EJ-Hope%3C/text%3E%3C/svg%3E"
+},
+
+{
+    name: "RM",
+
+    quote:
+    "Sigue caminando a tu propio ritmo; tu historia merece ser escrita con tus propias palabras.",
+
+    img:
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23d4a5ff' width='300' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='32' fill='%23512f7f' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3ERM%3C/text%3E%3C/svg%3E"
+},
+
+{
+    name: "Jimin",
+
+    quote:
+    "Hay personas que llegan a tu vida y convierten los pequeños momentos en recuerdos eternos.",
+
+    img:
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23d4a5ff' width='300' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='32' fill='%23512f7f' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EJimin%3C/text%3E%3C/svg%3E"
+},
+
+{
+    name: "V",
+
+    quote:
+    "Que cada día encuentre una razón nueva para recordarte lo especial que eres.",
+
+    img:
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23d4a5ff' width='300' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='32' fill='%23512f7f' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E"
+},
+
+{
+    name: "Jungkook",
+
+    quote:
+    "Nunca dejes de perseguir aquello que hace que tu corazón lata con ilusión.",
+
+    img:
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23d4a5ff' width='300' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='32' fill='%23512f7f' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EJungkook%3C/text%3E%3C/svg%3E"
+}
+
+];
+
+
+/* ==========================================
+   VARIABLES
+========================================== */
+
+let index = 0;
+
+let playing = false;
+
+let elapsed = 0;
+
+let timerId = null;
+
+const duration = 5000;
+
+
+/* ==========================================
+   ELEMENTOS
+========================================== */
+
+const face =
+document.getElementById("face");
+
+const quote =
+document.getElementById("quote");
+
+const name =
+document.getElementById("name");
+
+const finalScreen =
+document.getElementById("finalScreen");
+
+const memberList =
+document.getElementById("memberList");
+
+
+/* ==========================================
+   BOTONES DE LOS INTEGRANTES
+========================================== */
+
+members.forEach((member, i) => {
+
+    const button =
+    document.createElement("button");
+
+    button.className = "pill";
+
+    button.textContent =
+    member.name;
+
+    button.onclick = () => {
+
+        index = i;
+
+        elapsed = 0;
+
+        finalScreen.classList.remove("show");
+
+        render();
+
+    };
+
+    memberList.appendChild(button);
+
+});
+
+
+/* ==========================================
+   MOSTRAR INTEGRANTE
+========================================== */
+
+function render() {
+
+    const member =
+    members[index];
+
+
+    /* Cambiar imagen */
+
+    face.classList.remove("face");
+
+    void face.offsetWidth;
+
+    face.src =
+    member.img;
+
+    face.alt =
+    member.name;
+
+    face.classList.add("face");
+
+
+    /* Cambiar frase */
+
+    quote.textContent =
+    member.quote;
+
+
+    /* Nombre */
+
+    name.textContent =
+    member.name;
+
+
+    /* Botón activo */
+
+    [...memberList.children]
+    .forEach((button, i) => {
+
+        button.classList.toggle(
+            "active",
+            i === index
+        );
+
+    });
+
+}
+
+
+/* ==========================================
+   TEMPORIZADOR
+========================================== */
+
+function tick() {
+
+    if (!playing)
+        return;
+
+
+    elapsed += 100;
+
+
+    if (elapsed >= duration) {
+
+        index++;
+
+
+        elapsed = 0;
+
+
+        /*
+        Cuando termina Jungkook,
+        mostramos la imagen completa.
+        */
+
+        if (index >= members.length) {
+
+            playing = false;
+
+            clearInterval(timerId);
+
+            timerId = null;
+
+            finalScreen.classList.add(
+                "show"
+            );
+
+            return;
+        }
+
+
+        render();
+
+    }
+
+}
+
+
+/* ==========================================
+   INICIAR
+========================================== */
+
+function start() {
+
+    if (playing)
+        return;
+
+
+    playing = true;
+
+
+    timerId =
+    setInterval(
+        tick,
+        100
+    );
+
+}
+
+
+/* ==========================================
+   PAUSAR
+========================================== */
+
+function pause() {
+
+    playing = false;
+
+    clearInterval(timerId);
+
+    timerId = null;
+
+}
+
+
+/* ==========================================
+   REINICIAR
+========================================== */
+
+function restart() {
+
+    clearInterval(timerId);
+
+    timerId = null;
+
+    playing = false;
+
+    index = 0;
+
+    elapsed = 0;
+
+    finalScreen.classList.remove(
+        "show"
+    );
+
+    render();
+
+}
+
+
+/* ==========================================
+   BOTONES
+========================================== */
+
+document
+.getElementById("play")
+.onclick = start;
+
+
+document
+.getElementById("pause")
+.onclick = pause;
+
+
+document
+.getElementById("restart")
+.onclick = restart;
+
+
+/* ==========================================
+   INICIO
+========================================== */
+
+render();
+
+</script>
+
+</body>
+</html>
